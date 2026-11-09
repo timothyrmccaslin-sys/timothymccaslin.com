@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Timothy McCaslin</title>
   <meta name="description" content="Personal projects by Timothy McCaslin — apps, tools, and experiments.">
-  <meta name="theme-color" content="#0f1115">
+  <meta name="theme-color" content="#090A10">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
@@ -14,76 +14,134 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="/">
-        <img class="brand-mark" src="/assets/icons/icon-192.png" width="36" height="36" alt="">
-        <span>Timothy McCaslin</span>
+  <div class="backdrop" id="backdrop" hidden></div>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar">
+      <a class="brand" href="#overview" data-nav="overview">
+        <span class="brand-mark" aria-hidden="true">TM</span>
+        <span class="brand-text">
+          <strong>Timothy McCaslin</strong>
+          <span>Personal projects</span>
+        </span>
       </a>
-      <nav aria-label="Primary">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
+
+      <nav class="side-nav" aria-label="Primary">
+        <div class="nav-label">Menu</div>
+        <a class="nav-item active" href="#overview" data-nav="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+          Overview
+        </a>
+        <a class="nav-item" href="#projects" data-nav="projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          Projects
+        </a>
+        <a class="nav-item" href="#about" data-nav="about">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="0.8" fill="currentColor"/></svg>
+          About
+        </a>
       </nav>
-    </div>
-  </header>
 
-  <main id="main">
-    <section class="hero wrap">
-      <p class="eyebrow">Personal projects</p>
-      <h1>Timothy McCaslin</h1>
-      <!-- EDIT: Replace this placeholder intro with your own bio. -->
-      <p class="lede">
-        <!-- PLACEHOLDER INTRO — edit me -->
-        Builder of small, useful apps. This site is a home for personal projects —
-        starting with Odmit, a private to-do app. More coming soon.
-      </p>
-    </section>
-
-    <section id="projects" class="projects wrap">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <p>Things I’ve built and use. Click a card to open it.</p>
+      <div class="sidebar-foot">
+        © <span id="year"></span> Timothy McCaslin
       </div>
-      <!--
-        Easy to extend: add another <article class="card">…</article>
-        or append an object in /projects/projects.json and keep the markup in sync.
-      -->
-      <div class="card-grid" id="project-grid">
-        <article class="card">
-          <a class="card-link" href="https://timothyrmccaslin-sys.github.io/odmit/" rel="noopener">
-            <div class="card-icon">
-              <img src="/assets/icons/odmit-192.png" width="64" height="64" alt="">
+    </aside>
+
+    <div class="main-col">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <h1 class="page-title" id="page-title">Overview</h1>
+        </div>
+        <div class="topbar-meta">
+          <span class="pill pill-live"><span class="pill-dot" aria-hidden="true"></span> Dashboard</span>
+        </div>
+      </header>
+
+      <main id="main" class="content">
+        <!-- OVERVIEW -->
+        <section class="panel active" id="panel-overview" data-panel="overview" aria-labelledby="page-title">
+          <div class="intro-card">
+            <p class="eyebrow">Welcome</p>
+            <h2>Timothy McCaslin</h2>
+            <!-- EDIT: Replace this placeholder intro with your own bio. -->
+            <p>
+              <!-- PLACEHOLDER INTRO — edit me -->
+              Builder of small, useful apps. This dashboard is a home for personal projects —
+              starting with Odmit, a private to-do app. More coming soon.
+            </p>
+            <span class="edit-hint">PLACEHOLDER INTRO — edit me in index.html</span>
+          </div>
+
+          <div class="stats" aria-label="Project stats">
+            <div class="stat">
+              <p class="stat-label">Projects</p>
+              <p class="stat-value" id="stat-projects">—</p>
             </div>
-            <div class="card-body">
-              <h3>Odmit</h3>
-              <p>A free, private to-do app — lists, sharing, tags, and recurring tasks. Installable as a PWA.</p>
-              <span class="card-cta">Open Odmit →</span>
+            <div class="stat">
+              <p class="stat-label">Live</p>
+              <p class="stat-value" id="stat-live">—</p>
             </div>
-          </a>
-        </article>
-      </div>
-    </section>
+          </div>
 
-    <section id="about" class="about wrap">
-      <div class="section-head">
-        <h2>About</h2>
-      </div>
-      <!-- EDIT: Expand or replace this about blurb. -->
-      <p>
-        <!-- PLACEHOLDER ABOUT — edit me -->
-        This is a starter homepage for my personal projects. Hosted on GitHub Pages
-        at <strong>timothymccaslin.com</strong>.
-      </p>
-    </section>
-  </main>
+          <div class="section-head">
+            <div>
+              <h2>Projects</h2>
+              <p>Loaded from <code>projects/projects.json</code></p>
+            </div>
+          </div>
+          <div class="card-grid" id="overview-grid"></div>
+        </section>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>© <span id="year"></span> Timothy McCaslin</p>
+        <!-- PROJECTS -->
+        <section class="panel" id="panel-projects" data-panel="projects" hidden>
+          <div class="section-head">
+            <div>
+              <h2>All projects</h2>
+              <p>Add an object to <code>projects/projects.json</code> to list a new project.</p>
+            </div>
+          </div>
+          <div class="card-grid" id="projects-grid"></div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="panel" id="panel-about" data-panel="about" hidden>
+          <div class="about-card">
+            <div class="section-head" style="margin-bottom:0.75rem;">
+              <div>
+                <h2>About</h2>
+              </div>
+            </div>
+            <!-- EDIT: Expand or replace this about blurb. -->
+            <p>
+              <!-- PLACEHOLDER ABOUT — edit me -->
+              This is a starter personal-projects dashboard. Hosted on GitHub Pages
+              at <strong style="color:var(--text)">timothymccaslin.com</strong>.
+            </p>
+            <span class="edit-hint">PLACEHOLDER ABOUT — edit me in index.html</span>
+          </div>
+        </section>
+      </main>
     </div>
-  </footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobile">
+    <a class="nav-item active" href="#overview" data-nav="overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+      Overview
+    </a>
+    <a class="nav-item" href="#projects" data-nav="projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Projects
+    </a>
+    <a class="nav-item" href="#about" data-nav="about">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="0.8" fill="currentColor"/></svg>
+      About
+    </a>
+  </nav>
+
+  <script src="/app.js"></script>
 </body>
 </html>
