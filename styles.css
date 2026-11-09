@@ -283,16 +283,6 @@ a:hover { text-decoration: underline; }
   color: var(--muted);
   max-width: 48rem;
 }
-.edit-hint {
-  display: inline-block;
-  margin-top: 0.65rem;
-  padding: 0.15rem 0.45rem;
-  border-radius: 6px;
-  background: var(--accent-dim);
-  color: #FFC08A;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-}
 
 /* Stats */
 .stats {
