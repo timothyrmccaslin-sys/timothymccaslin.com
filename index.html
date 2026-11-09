@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timothy McCaslin</title>
+  <meta name="description" content="Personal projects by Timothy McCaslin — apps, tools, and experiments.">
+  <meta name="theme-color" content="#0f1115">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <img class="brand-mark" src="/assets/icons/icon-192.png" width="36" height="36" alt="">
+        <span>Timothy McCaslin</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap">
+      <p class="eyebrow">Personal projects</p>
+      <h1>Timothy McCaslin</h1>
+      <!-- EDIT: Replace this placeholder intro with your own bio. -->
+      <p class="lede">
+        <!-- PLACEHOLDER INTRO — edit me -->
+        Builder of small, useful apps. This site is a home for personal projects —
+        starting with Odmit, a private to-do app. More coming soon.
+      </p>
+    </section>
+
+    <section id="projects" class="projects wrap">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>Things I’ve built and use. Click a card to open it.</p>
+      </div>
+      <!--
+        Easy to extend: add another <article class="card">…</article>
+        or append an object in /projects/projects.json and keep the markup in sync.
+      -->
+      <div class="card-grid" id="project-grid">
+        <article class="card">
+          <a class="card-link" href="https://timothyrmccaslin-sys.github.io/odmit/" rel="noopener">
+            <div class="card-icon">
+              <img src="/assets/icons/odmit-192.png" width="64" height="64" alt="">
+            </div>
+            <div class="card-body">
+              <h3>Odmit</h3>
+              <p>A free, private to-do app — lists, sharing, tags, and recurring tasks. Installable as a PWA.</p>
+              <span class="card-cta">Open Odmit →</span>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="about wrap">
+      <div class="section-head">
+        <h2>About</h2>
+      </div>
+      <!-- EDIT: Expand or replace this about blurb. -->
+      <p>
+        <!-- PLACEHOLDER ABOUT — edit me -->
+        This is a starter homepage for my personal projects. Hosted on GitHub Pages
+        at <strong>timothymccaslin.com</strong>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> Timothy McCaslin</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
