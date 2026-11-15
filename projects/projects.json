@@ -6,5 +6,13 @@
     "icon": "/assets/icons/odmit-192.png",
     "status": "live",
     "stack": "PWA · Vanilla JS"
+  },
+  {
+    "name": "Asura",
+    "description": "An idle tower defense game in sumi-e ink. You are the Asura at the centre; ninja, samurai, oni and tengu come from every side. Saves in your browser.",
+    "url": "https://timothyrmccaslin-sys.github.io/asura-idle/",
+    "icon": "/assets/icons/asura-192.png",
+    "status": "live",
+    "stack": "Rust · WebAssembly · Canvas"
   }
 ]
