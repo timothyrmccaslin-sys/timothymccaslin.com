@@ -14,5 +14,13 @@
     "icon": "/assets/icons/asura-192.png",
     "status": "live",
     "stack": "Rust · WebAssembly · PWA"
+  },
+  {
+    "name": "Inkborne",
+    "description": "A turn-based JRPG demo in sumi-e ink. Chain timed brushstrokes, fill the Vermilion Ink gauge and unfurl into a winged Inkwing form to stop the Blot unwriting the world. Installable app, plays offline.",
+    "url": "https://timothyrmccaslin-sys.github.io/inkborne/",
+    "icon": "/assets/icons/inkborne-192.png",
+    "status": "live",
+    "stack": "Rust · WebAssembly · PWA"
   }
 ]
