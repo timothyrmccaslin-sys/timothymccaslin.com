@@ -1,6 +1,6 @@
 # timothymccaslin.com
 
-Personal projects dashboard for Timothy McCaslin.
+Personal projects dossier for Timothy McCaslin.
 
 - **Live:** https://timothymccaslin.com (GitHub Pages)
 - **Stack:** static HTML/CSS/vanilla JS — no build step

@@ -2,19 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Not found — Timothy McCaslin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>404 // File Not Found — Timothy McCaslin</title>
   <meta name="theme-color" content="#090A10">
+  <meta name="color-scheme" content="dark">
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
   <main class="page-404">
-    <div class="box">
-      <p class="code">404</p>
-      <h1>Page not found</h1>
-      <p>That page doesn’t exist on this dashboard.</p>
-      <a class="btn btn-primary" href="/">← Back to Overview</a>
+    <div class="wrap">
+      <p class="kicker"><span class="rec"><span class="rec-dot" aria-hidden="true">●</span> REC</span> <span class="sep">//</span> ERROR 404</p>
+      <h1 class="headline">FILE NOT<br>FOUND</h1>
+      <div class="file">
+        <div class="file-head">
+          <span class="meta">TIMOTHY MCCASLIN <span class="sep">//</span> PROJECT DOSSIER</span>
+          <span class="tag tag-accent"><span class="tag-dot" aria-hidden="true">●</span> REDACTED</span>
+        </div>
+        <div class="file-body">
+          <dl class="kv">
+            <div><dt>REQUEST:</dt><dd class="hot">NO RECORD ON FILE</dd></div>
+            <div><dt>STATUS:</dt><dd>PAGE DOES NOT EXIST</dd></div>
+          </dl>
+          <a class="directive" href="/">
+            <span class="directive-label">DIRECTIVE:</span>
+            <span class="directive-text">RETURN TO DOSSIER</span>
+            <span class="directive-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
     </div>
   </main>
 </body>

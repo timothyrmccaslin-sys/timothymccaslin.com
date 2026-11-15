@@ -1,73 +1,15 @@
 (function () {
-  const TITLES = {
-    overview: 'Overview',
-    projects: 'Projects',
-    about: 'About'
-  };
+  const TITLES = { overview: 'Overview', projects: 'Projects', about: 'About' };
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  const year = String(new Date().getFullYear());
+  ['year', 'case-year'].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = year;
+  });
 
-  const sidebar = document.getElementById('sidebar');
-  const backdrop = document.getElementById('backdrop');
-  const menuBtn = document.getElementById('menu-btn');
   const pageTitle = document.getElementById('page-title');
-
-  function closeSidebar() {
-    if (!sidebar) return;
-    sidebar.classList.remove('open');
-    if (backdrop) {
-      backdrop.classList.remove('show');
-      backdrop.hidden = true;
-    }
-    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  function openSidebar() {
-    if (!sidebar) return;
-    sidebar.classList.add('open');
-    if (backdrop) {
-      backdrop.hidden = false;
-      backdrop.classList.add('show');
-    }
-    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
-  }
-
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      if (sidebar && sidebar.classList.contains('open')) closeSidebar();
-      else openSidebar();
-    });
-  }
-  if (backdrop) backdrop.addEventListener('click', closeSidebar);
-
-  function setActiveNav(name) {
-    document.querySelectorAll('[data-nav]').forEach(function (el) {
-      el.classList.toggle('active', el.getAttribute('data-nav') === name);
-    });
-  }
-
-  function showPanel(name) {
-    const key = TITLES[name] ? name : 'overview';
-    document.querySelectorAll('[data-panel]').forEach(function (panel) {
-      const on = panel.getAttribute('data-panel') === key;
-      panel.classList.toggle('active', on);
-      panel.hidden = !on;
-    });
-    if (pageTitle) pageTitle.textContent = TITLES[key];
-    setActiveNav(key);
-    closeSidebar();
-  }
-
-  function statusPill(status) {
-    const s = String(status || 'live').toLowerCase();
-    const label = s.charAt(0).toUpperCase() + s.slice(1);
-    return (
-      '<span class="pill pill-live"><span class="pill-dot" aria-hidden="true"></span>' +
-      escapeHtml(label) +
-      '</span>'
-    );
-  }
+  const typed = new WeakSet();
 
   function escapeHtml(str) {
     return String(str)
@@ -77,74 +19,127 @@
       .replace(/"/g, '&quot;');
   }
 
-  function cardHtml(p) {
+  // Typewriter-style reveal for headlines (skipped for reduced motion).
+  function typeReveal(el) {
+    if (!el || reduceMotion || typed.has(el)) return;
+    typed.add(el);
+    const html = el.innerHTML;
+    const parts = html.split(/(<br\s*\/?>)/i);
+    el.setAttribute('aria-label', el.textContent);
+    el.innerHTML = parts.map(function (p) {
+      if (/^<br/i.test(p)) return p;
+      return p.split('').map(function (c) {
+        return '<span class="ch" aria-hidden="true">' + c + '</span>';
+      }).join('');
+    }).join('');
+    const chars = el.querySelectorAll('.ch');
+    chars.forEach(function (c, i) {
+      c.style.animationDelay = (i * 45) + 'ms';
+    });
+    el.classList.add('typing');
+  }
+
+  function setActiveNav(name) {
+    document.querySelectorAll('[data-nav]').forEach(function (el) {
+      const on = el.getAttribute('data-nav') === name;
+      el.classList.toggle('active', on);
+      if (el.classList.contains('tab')) {
+        if (on) el.setAttribute('aria-current', 'page');
+        else el.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function showPanel(name) {
+    const key = TITLES[name] ? name : 'overview';
+    document.querySelectorAll('[data-panel]').forEach(function (panel) {
+      const on = panel.getAttribute('data-panel') === key;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+      if (on) typeReveal(panel.querySelector('[data-type]'));
+    });
+    if (pageTitle) pageTitle.textContent = TITLES[key];
+    document.title = 'Timothy McCaslin // ' + TITLES[key];
+    setActiveNav(key);
+  }
+
+  function statusTag(status) {
+    const s = String(status || 'live').toUpperCase();
+    return '<span class="tag tag-accent"><span class="tag-dot" aria-hidden="true">●</span> ' + escapeHtml(s) + '</span>';
+  }
+
+  function prettyUrl(url) {
+    return String(url || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
+  }
+
+  function cardHtml(p, i) {
     const name = escapeHtml(p.name || 'Untitled');
     const desc = escapeHtml(p.description || '');
     const url = escapeHtml(p.url || '#');
     const icon = escapeHtml(p.icon || '');
+    const status = escapeHtml(String(p.status || 'live').toUpperCase());
+    const no = String(i + 1).padStart(2, '0');
     return (
-      '<article class="card">' +
-        '<div class="card-top">' +
-          '<div class="card-icon">' +
-            (icon ? '<img src="' + icon + '" width="48" height="48" alt="">' : '') +
+      '<article class="file card">' +
+        '<div class="file-head">' +
+          '<span class="meta">EXHIBIT ' + no + ' <span class="sep">//</span> PROJECT FILE</span>' +
+          statusTag(p.status) +
+        '</div>' +
+        '<div class="file-body">' +
+          '<div class="card-title">' +
+            (icon ? '<img class="card-icon" src="' + icon + '" width="44" height="44" alt="">' : '') +
+            '<h3 class="card-name">' + name + '</h3>' +
           '</div>' +
-          statusPill(p.status) +
-        '</div>' +
-        '<div class="card-body">' +
-          '<h3>' + name + '</h3>' +
-          '<p>' + desc + '</p>' +
-        '</div>' +
-        '<div class="card-actions">' +
-          '<a class="btn btn-primary" href="' + url + '" rel="noopener" target="_blank">Open</a>' +
+          '<dl class="kv">' +
+            '<div><dt>PROJECT:</dt><dd class="hot">' + name.toUpperCase() + '</dd></div>' +
+            '<div><dt>STATUS:</dt><dd>' + status + '</dd></div>' +
+            (p.stack ? '<div><dt>STACK:</dt><dd>' + escapeHtml(String(p.stack).toUpperCase()) + '</dd></div>' : '') +
+            '<div><dt>LINK:</dt><dd><a class="inline-link" href="' + url + '" rel="noopener" target="_blank">' + escapeHtml(prettyUrl(p.url)) + '</a></dd></div>' +
+          '</dl>' +
+          (desc ? '<p class="note">' + desc + '</p>' : '') +
+          '<a class="directive" href="' + url + '" rel="noopener" target="_blank">' +
+            '<span class="directive-label">DIRECTIVE:</span> ' +
+            '<span class="directive-text">OPEN ' + name.toUpperCase() + '</span>' +
+            '<span class="directive-arrow" aria-hidden="true">→</span>' +
+            '<span class="sr-only"> (opens in a new tab)</span>' +
+          '</a>' +
         '</div>' +
       '</article>'
     );
   }
 
   function renderProjects(list) {
-    const overview = document.getElementById('overview-grid');
-    const projects = document.getElementById('projects-grid');
     const html = list.length
       ? list.map(cardHtml).join('')
-      : '<div class="empty">No projects yet. Add one in projects/projects.json.</div>';
-    if (overview) overview.innerHTML = html;
-    if (projects) projects.innerHTML = html;
-
-    const total = list.length;
+      : '<div class="file empty"><div class="file-body"><p class="meta">NO FILES ON RECORD. ADD ONE IN projects/projects.json.</p></div></div>';
+    ['overview-grid', 'projects-grid'].forEach(function (id) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    });
     const live = list.filter(function (p) {
       return String(p.status || 'live').toLowerCase() === 'live';
     }).length;
     const sp = document.getElementById('stat-projects');
     const sl = document.getElementById('stat-live');
-    if (sp) sp.textContent = String(total);
-    if (sl) sl.textContent = String(live);
+    if (sp) sp.textContent = String(list.length).padStart(2, '0');
+    if (sl) sl.textContent = String(live).padStart(2, '0');
   }
 
   function routeFromHash() {
-    const raw = (location.hash || '#overview').replace(/^#/, '');
-    showPanel(raw);
+    showPanel((location.hash || '#overview').replace(/^#/, ''));
   }
 
-  document.querySelectorAll('[data-nav]').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      const name = el.getAttribute('data-nav');
-      if (!name) return;
-      // let hash update; hashchange handles panel
-    });
+  window.addEventListener('hashchange', function () {
+    routeFromHash();
+    window.scrollTo(0, 0);
   });
-
-  window.addEventListener('hashchange', routeFromHash);
 
   fetch('/projects/projects.json', { cache: 'no-store' })
     .then(function (r) {
       if (!r.ok) throw new Error('Failed to load projects');
       return r.json();
     })
-    .then(function (data) {
-      renderProjects(Array.isArray(data) ? data : []);
-    })
-    .catch(function () {
-      renderProjects([]);
-    })
+    .then(function (data) { renderProjects(Array.isArray(data) ? data : []); })
+    .catch(function () { renderProjects([]); })
     .finally(routeFromHash);
 })();

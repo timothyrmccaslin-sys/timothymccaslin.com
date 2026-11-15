@@ -4,6 +4,7 @@
     "description": "A free, private to-do app — lists, sharing, tags, and recurring tasks. Installable as a PWA.",
     "url": "https://timothyrmccaslin-sys.github.io/odmit/",
     "icon": "/assets/icons/odmit-192.png",
-    "status": "live"
+    "status": "live",
+    "stack": "PWA · Vanilla JS"
   }
 ]
