@@ -22,5 +22,13 @@
     "icon": "/assets/icons/inkborne-192.png",
     "status": "live",
     "stack": "Rust · WebAssembly · PWA"
+  },
+  {
+    "name": "A+ Quiz",
+    "description": "Interactive CompTIA A+ study quiz with multiple-choice, drag-and-drop, and performance-based simulations. Installable PWA with offline support and detailed explanations.",
+    "url": "https://timothyrmccaslin-sys.github.io/comptia-a-plus-quiz/",
+    "icon": "/assets/icons/aplus-192.png",
+    "status": "live",
+    "stack": "PWA · Vanilla JS"
   }
 ]
