@@ -24,11 +24,10 @@
     "stack": "Rust · WebAssembly · PWA"
   },
   {
-    "name": "A+ Quiz",
-    "description": "Interactive CompTIA A+ study quiz with multiple-choice, drag-and-drop, and performance-based simulations. Installable PWA with offline support and detailed explanations.",
-    "url": "https://timothyrmccaslin-sys.github.io/comptia-a-plus-quiz/",
-    "icon": "/assets/icons/aplus-192.png",
-    "status": "live",
-    "stack": "PWA · Vanilla JS"
+    "name": "aiNonomous Chat",
+    "description": "An end-to-end encrypted, decentralized messaging PWA for chatting with friends and for tech support with anonymous guests. Built with Rust compiled to WebAssembly and Material 3, in light and dark. In planning and early development.",
+    "icon": "/assets/icons/ainonomous-192.png",
+    "status": "coming soon",
+    "stack": "Rust · WebAssembly · PWA · Material 3"
   }
 ]

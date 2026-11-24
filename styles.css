@@ -216,6 +216,14 @@ code {
 .directive-arrow { margin-left: auto; color: var(--accent); transition: transform .15s; }
 .directive:hover { background: rgba(255, 122, 26, 0.18); }
 .directive:hover .directive-arrow { transform: translateX(4px); }
+.directive-pending {
+  margin: 0;
+  color: var(--muted);
+  background: transparent;
+  border-left-color: var(--line);
+  cursor: default;
+}
+.directive-pending .directive-label { color: var(--muted); }
 
 /* Footer */
 .foot {

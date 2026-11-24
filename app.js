@@ -65,7 +65,8 @@
 
   function statusTag(status) {
     const s = String(status || 'live').toUpperCase();
-    return '<span class="tag tag-accent"><span class="tag-dot" aria-hidden="true">●</span> ' + escapeHtml(s) + '</span>';
+    const kind = s === 'LIVE' ? 'tag-accent' : 'tag-blue';
+    return '<span class="tag ' + kind + '"><span class="tag-dot" aria-hidden="true">●</span> ' + escapeHtml(s) + '</span>';
   }
 
   function prettyUrl(url) {
@@ -75,15 +76,30 @@
   function cardHtml(p, i) {
     const name = escapeHtml(p.name || 'Untitled');
     const desc = escapeHtml(p.description || '');
-    const url = escapeHtml(p.url || '#');
+    const rawUrl = p.url ? String(p.url) : '';
+    const url = escapeHtml(rawUrl);
     const icon = escapeHtml(p.icon || '');
-    const status = escapeHtml(String(p.status || 'live').toUpperCase());
+    const status = escapeHtml(String(p.status || (rawUrl ? 'live' : 'coming soon')).toUpperCase());
     const no = String(i + 1).padStart(2, '0');
+    const linkRow = rawUrl
+      ? '<div><dt>LINK:</dt><dd><a class="inline-link" href="' + url + '" rel="noopener" target="_blank">' + escapeHtml(prettyUrl(rawUrl)) + '</a></dd></div>'
+      : '<div><dt>LINK:</dt><dd>COMING SOON</dd></div>';
+    const cta = rawUrl
+      ? '<a class="directive" href="' + url + '" rel="noopener" target="_blank">' +
+          '<span class="directive-label">DIRECTIVE:</span> ' +
+          '<span class="directive-text">OPEN ' + name.toUpperCase() + '</span>' +
+          '<span class="directive-arrow" aria-hidden="true">→</span>' +
+          '<span class="sr-only"> (opens in a new tab)</span>' +
+        '</a>'
+      : '<p class="directive directive-pending">' +
+          '<span class="directive-label">DIRECTIVE:</span> ' +
+          '<span class="directive-text">COMING SOON</span>' +
+        '</p>';
     return (
       '<article class="file card">' +
         '<div class="file-head">' +
           '<span class="meta">EXHIBIT ' + no + ' <span class="sep">//</span> PROJECT FILE</span>' +
-          statusTag(p.status) +
+          statusTag(p.status || (rawUrl ? 'live' : 'coming soon')) +
         '</div>' +
         '<div class="file-body">' +
           '<div class="card-title">' +
@@ -94,15 +110,10 @@
             '<div><dt>PROJECT:</dt><dd class="hot">' + name.toUpperCase() + '</dd></div>' +
             '<div><dt>STATUS:</dt><dd>' + status + '</dd></div>' +
             (p.stack ? '<div><dt>STACK:</dt><dd>' + escapeHtml(String(p.stack).toUpperCase()) + '</dd></div>' : '') +
-            '<div><dt>LINK:</dt><dd><a class="inline-link" href="' + url + '" rel="noopener" target="_blank">' + escapeHtml(prettyUrl(p.url)) + '</a></dd></div>' +
+            linkRow +
           '</dl>' +
           (desc ? '<p class="note">' + desc + '</p>' : '') +
-          '<a class="directive" href="' + url + '" rel="noopener" target="_blank">' +
-            '<span class="directive-label">DIRECTIVE:</span> ' +
-            '<span class="directive-text">OPEN ' + name.toUpperCase() + '</span>' +
-            '<span class="directive-arrow" aria-hidden="true">→</span>' +
-            '<span class="sr-only"> (opens in a new tab)</span>' +
-          '</a>' +
+          cta +
         '</div>' +
       '</article>'
     );
