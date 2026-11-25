@@ -24,6 +24,14 @@
     "stack": "Rust · WebAssembly · PWA"
   },
   {
+    "name": "HYOH",
+    "description": "Hike Your Own Hike: an endless, procedurally generated walk through the Appalachian mountains. Blue ridgelines fading into haze, hardwood coves, hemlock hollows, creeks and valley mist, with a season switcher and synthesized wind, creeks and birdsong. Runs in the browser, no downloads.",
+    "url": "https://timothyrmccaslin-sys.github.io/HYOH/",
+    "icon": "/assets/icons/hyoh-192.png",
+    "status": "live",
+    "stack": "WebGL2 · Vanilla JS"
+  },
+  {
     "name": "aiNonomous Chat",
     "description": "An end-to-end encrypted, decentralized messaging PWA for chatting with friends and for tech support with anonymous guests. Built with Rust compiled to WebAssembly and Material 3, in light and dark. In planning and early development.",
     "icon": "/assets/icons/ainonomous-192.png",
