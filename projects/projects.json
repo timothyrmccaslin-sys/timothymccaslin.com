@@ -32,6 +32,14 @@
     "stack": "WebGL2 · Vanilla JS"
   },
   {
+    "name": "Powder Holler",
+    "description": "An endless, first-person downhill ski run through the Appalachian high country. Carve through spruce and fir, catch air off kickers, grab snowflakes, thread slalom gates, and keep ahead of the Holler Yeti. Runs in the browser, no downloads.",
+    "url": "https://timothyrmccaslin-sys.github.io/PowderHoller/",
+    "icon": "/assets/icons/powderholler-192.png",
+    "status": "live",
+    "stack": "WebGL2 · Vanilla JS"
+  },
+  {
     "name": "aiNonomous Chat",
     "description": "An end-to-end encrypted, decentralized messaging PWA for chatting with friends and for tech support with anonymous guests. Built with Rust compiled to WebAssembly and Material 3, in light and dark. In planning and early development.",
     "icon": "/assets/icons/ainonomous-192.png",
